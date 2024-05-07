@@ -80,10 +80,9 @@ I pledge my honor I have abided by the Steven's Honor System
 
 ## Modifications
 
-
-
-
-
+* We used the code from the Siren lab, Lab 5, as our jumping-off point. We used source parts from dac_if.vhd, tone.vhd, and siren.vhd and we used the siren.xdc constraint file as well.
+* There are two versions of our project: one that plays all of the notes consecutively after saving, as a sort of song; and one that plays each note in order every time you hit play.
+* We mainly modified the siren.vhd file as our main code. We expanded off of the original siren code by adding several different signals that handle pitches and saves. We also added in the FSM (finite state machine) that handles storing pitches and playing them.
 
 
 
