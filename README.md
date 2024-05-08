@@ -16,7 +16,8 @@ I pledge my honor I have abided by the Steven's Honor System
 * Wired Speaker or Headphones
 
 ## Related Diagrams, Images and Videos:
-* [insert photo of final two finite state machines here]
+* ![image](https://github.com/JoshuaMarinoo/FinalProjectCPE487/assets/78558258/d14a8d81-e515-4d05-bad5-3da897e88da2)
+
 * [insert videoes of the board and code working]
 
 ## How to Use Code and Vivado Board:
