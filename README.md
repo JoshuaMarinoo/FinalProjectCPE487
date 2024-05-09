@@ -13,6 +13,10 @@ I pledge my honor I have abided by the Steven's Honor System
 ![Play Pitch Part of Second FSM](https://github.com/JoshuaMarinoo/FinalProjectCPE487/blob/main/Play%20Pitch%20Part%20of%20Second%20FSM)
 ![Save Pitch Part of Second FSM](https://github.com/JoshuaMarinoo/FinalProjectCPE487/blob/main/Save%20Pitch%20Part%20of%20Second%20FSM)
   
+
+https://github.com/JoshuaMarinoo/FinalProjectCPE487/assets/95676728/5840b781-d334-4db5-878e-09ffa661cb08
+
+
 ## Attachments Needed:
 * Pmod I2S Digital to Analog Converter
 * Wired Speaker or Headphones
