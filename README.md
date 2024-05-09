@@ -16,6 +16,7 @@ I pledge my honor I have abided by the Steven's Honor System
 ## Attachments Needed:
 * Pmod I2S Digital to Analog Converter
 * Wired Speaker or Headphones
+![Pmod I2S](https://github.com/byett/dsd/blob/CPE487-Spring2024/Nexys-A7/Lab-5/i2s2.jpg)
 
 
 ## How to Use Code and Vivado Board:
@@ -80,7 +81,7 @@ I pledge my honor I have abided by the Steven's Honor System
   * DAC_SDIN
   * DAC_SCLK
   * DAC_LRCK
-
+![Inputs and Outputs of Project](https://github.com/JoshuaMarinoo/FinalProjectCPE487/blob/main/Inputs%20and%20Outputs%20of%20Project)
 
 ## Modifications
 
@@ -103,6 +104,8 @@ I pledge my honor I have abided by the Steven's Honor System
     * We then made a process called pitch_sel which is going to see what is in octaveSig and noteSig, then using the values of octaveSig and noteSig chooses the pitch of the tone we are going to play is, to hold the pitch we made a new signal called pitch and then in the process itself we made a very long if else statement that checks the octaveSig and noteSig and sees whether it is a specific value, and set pitch to the specific pitch that corresponds with the note and octave data we are currently reading
       * There are only 12 notes and 9 octaves in total, but with four switches we are going to have 16 total options to choose from, so what we did was set the if else statement to have the same output for the last 7 octaves as long as the note remains the same, and have the same output for the last 5 notes as long as the octave remains the same
       * We chose the specific pitch for a specific octave and note combination by using a pitch frequency chart based on note and octave that is included in the related diagrams, images and videos part of the readme, we then assigned the specific pitch frequency to the pitch signal by using to_unsigned(x,14) where x is the frequency of the specific note in the specific octave we are in and we use 14 bits since the pitch in the tone code is 14 bits long unsigned
+![part of the process to decide pitch](https://github.com/JoshuaMarinoo/FinalProjectCPE487/blob/main/Image%205-9-24%20at%205.38%20AM.jpeg)
+![part of the process to decide pitch](https://github.com/JoshuaMarinoo/FinalProjectCPE487/blob/main/Image%205-9-24%20at%205.38%20AM%20(1).jpeg)
     * We then realized we needed to create an FSM to move through the different states of changing pitch, saving the pitch and then playing the pitch, so what we did was copy and paste a couple of signals and the FSM process from the hexcalc lab and started to cut away from it and add to it to make it work for what we wanted it to do
       * Copy and Pasting the type already created in hexcalc called state, deleting the current states that are in and replacing them with the states we are going to use called enter_pitch, save_pitch, and play_pitch
       * Copy and Pasting the signals nx_state and pr_state which are meant to hold the next state and the present state that is being used in the FSM, along with another separate signal sm_clk which is going to be the clock we use to switch between states, we then set the sm_clk to the 20th bit of tcount, tcount being a signal already in siren.vhd that in another process is being incremented by 1 every single rising edge of the 50Mhz clk
@@ -127,7 +130,11 @@ I pledge my honor I have abided by the Steven's Honor System
 ![Save Pitch Part of Second FSM](https://github.com/JoshuaMarinoo/FinalProjectCPE487/blob/main/Save%20Pitch%20Part%20of%20Second%20FSM)
           * For the actual playing of the pitches we saved we would need to separate the playing of each pitch into two different states, the play_pitch state and the relplaypitch state. The play_pitch state would deal with the initial press of the play button, where in the case of play_pitch1 if the button is pressed when we are in the state we would set pitchIN to the pitchHolder that corresponds to the current play_pitch state we are in, which for play_pitch1 would be pitchHolder0 and then sets the nx_state to relplaypitch2, and if the button is not pressed in the state we would just stay in play_pitch1. Then in relplaypitch2, we would then see if the button is continuing to be pressed, if it is still being pressed then we set pitchIN to the pitchHolder that corresponds to the current relplaypitch state we are in which for relplaypitch2 would be pitchHolder0 and then we stay in relplaypitch2, by setting the nx_state to the current relplaypitch state we are in or in thise case relplaypitch2. If the button is let go then we set nx_state to the next play_pitch state, which in the case of relplaypitch2 is play_pitch2. However in the case of relplaypitch5, the state after play_pitch4, we can not go to play_pitch5 so what we do instead is set the nx_state to enter_pitch if the button is let go so that we can rechoose pitches or restart the play cycle again.
 ![Play Pitch Part of Second FSM](https://github.com/JoshuaMarinoo/FinalProjectCPE487/blob/main/Play%20Pitch%20Part%20of%20Second%20FSM)
+![first part of second FSM](https://github.com/JoshuaMarinoo/FinalProjectCPE487/blob/main/Image%205-9-24%20at%205.33%20AM.jpeg)
+![second part of second FSM](https://github.com/JoshuaMarinoo/FinalProjectCPE487/blob/main/Image%205-9-24%20at%205.33%20AM%20(1).jpeg)
+![third part of second FSM](https://github.com/JoshuaMarinoo/FinalProjectCPE487/blob/main/Image%205-9-24%20at%205.34%20AM.jpeg)
       * To implement the display showing which state in the FSM we are in at the moment, we needed to borrow a couple more things from the hexcalc lab. This being the leddec code file, along with the component initialization of the leddec object, and the mapping for a specific instance of the leddec object, new output port that deal with turning on the anode itself and segments of the anode to display values and lines from the xdc file that map pins in the ports to those ouputs.We then added the two new output ports SEG7_anode, SEG7_seg that will deal with sending output to the pins we assign them to, we then need to add in the constraint file the lines that match the output port bits to the pins relating to the anode and its segments. We then put the component initialization of the leddec object in the finalProject.vhd file, along with the mapping for one instance of the object. We then map dig, which select which display part to turn on to "000" so it only turns on the first digit of the display always, we map the output that deal with the anode and segments of the anode to the two new output ports we created and then we map the data input of the leddec instance to a new signal we are going to created called stateNUM which will be a four bit std_logic_vector, we then need to add a line in each of the states of the FSM assigning it a specific and indiviudal stateNum, this will then cause the anode display to show that state we are in with a hexadecimal representation of the stateNum of the state we are currently in.
+![Mapping of Instances of Objects](https://github.com/JoshuaMarinoo/FinalProjectCPE487/blob/main/Mapping%20of%20instances%20of%20objects)
 
 
 
