@@ -55,8 +55,6 @@ https://github.com/JoshuaMarinoo/FinalProjectCPE487/assets/95676728/5840b781-d33
     
 19. Press the play button and hear all four pitches played in a loop consecutively
 
-* [insert videoes of the board and code working]
-
 ## Inputs from and Outputs to Board:
 ### Inputs
 * 50 MHz Clock
