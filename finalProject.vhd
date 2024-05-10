@@ -501,7 +501,7 @@ pitch_sel : PROCESS
 				    END IF;
 				WHEN ENTER_PITCH4 => -- waiting for next digit in 1st operand entry
 				    pitchIN<=pitch;
-				    stateNUM<="0111";
+				    stateNUM<="0110";
 				    
 					IF btPlay = '1' THEN
 						nx_state <= play_pitch1;
@@ -512,7 +512,7 @@ pitch_sel : PROCESS
 					END IF;
 				WHEN SAVE_PITCH4 => -- waiting for button to be released
 				    pitchIN<=pitch;
-				    stateNUM<="1000";
+				    stateNUM<="0111";
 				    If btSave = '0' then
 				    pitchIn5<=pitchIN5;
 				        pitchHolder3<=pitchin5;
@@ -528,7 +528,7 @@ pitch_sel : PROCESS
 				       -- nx_state<=relplaypitch1;
 				   -- end if;
 				WHEN PLAY_PITCH1 => 
-				stateNUM<="1001";
+				stateNUM<="1000";
 				    if btplay = '1' then
 				        pitchIN<=pitchHolder0;
 				        nx_state<=relplaypitch2;
@@ -536,6 +536,7 @@ pitch_sel : PROCESS
 				        nx_state<=play_pitch1;
 				    END IF;
 				when relplaypitch2=>
+				stateNUM<="1001";
 				    if btplay='0' Then
 				        nx_state<=play_pitch2;
 				    else 
@@ -551,6 +552,7 @@ pitch_sel : PROCESS
 				        nx_state<=play_pitch2;
 				    END IF;
 				when relplaypitch3=>
+				stateNUM<="1011";
 				    if btplay='0' Then
 				        nx_state<=play_pitch3;
 				    else 
@@ -558,7 +560,7 @@ pitch_sel : PROCESS
 				        pitchIN<=pitchHolder1;
 				    end if;
 				WHEN PLAY_PITCH3 => 
-				stateNUM<="1011";
+				stateNUM<="1100";
 				    if btplay = '1' then
 				        pitchIN<=pitchHolder2;
 				        nx_state<=relplaypitch4;
@@ -566,6 +568,7 @@ pitch_sel : PROCESS
 				        nx_state<=play_pitch3;
 				    END IF;
 				when relplaypitch4=>
+				stateNUM<="1101";
 				    if btplay='0' Then
 				        nx_state<=play_pitch4;
 				    else 
@@ -573,7 +576,7 @@ pitch_sel : PROCESS
 				        pitchIN<=pitchHolder2;
 				    end if;
 				WHEN PLAY_PITCH4 => 
-				stateNUM<="1100";
+				stateNUM<="1110";
 				    if btplay = '1' then
 				        pitchIN<=pitchHolder3;
 				        nx_state<=relplaypitch5;
@@ -581,6 +584,7 @@ pitch_sel : PROCESS
 				        nx_state<=play_pitch4;
 				    END IF;
 			    when relplaypitch5=>
+			     stateNUM<="1111";
 				    if btplay='0' Then
 				        nx_state<=enter_pitch1;
 				    else 
